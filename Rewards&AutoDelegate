@@ -12,7 +12,7 @@ sleep 5
 
 balance=`$binary q bank balances $address -o json | jq -r .balances[].amount `
 
-stake=(($balance-2000))
+stake=$(($balance-2000))
 
 sleep 3
 
