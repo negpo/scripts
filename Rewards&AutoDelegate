@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source $HOME/.bashrc
+
+while :
+
+do
+
+(echo ${WALLET_PASS}) | $binary tx distribution withdraw-rewards $valoper --from $address --fees 500$DENOM --commission -y
+
+sleep 5
+
+balance=`$binary q bank balances $address -o json | jq -r .balances[].amount `
+
+stake=(($balance-2000))
+
+sleep 3
+
+(echo ${WALLET_PASS}) | $binary tx staking delegate $valoper ${stake}`echo $DENOM` --from $address --fees 500$DENOM -y
+
+sleep 60
+
+done
